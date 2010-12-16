@@ -1,0 +1,11 @@
+<%= render :partial => 'cube', :locals => {:game => @game} %>
+<script type="text/javascript" charset="utf-8">
+  $(function() {
+    $(".rsvp").live("click", function(){
+      $.post(this.getAttribute("url"), function(snapshot) {
+        updateCube(snapshot);
+      });
+    });
+    initViews();
+  });
+</script>

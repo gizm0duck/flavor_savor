@@ -1,0 +1,29 @@
+<div id="cube-<%= game.id %>" class="game" gameid="<%= game.id %>">
+  <div>
+    <p>Current User: <%= @current_user.name %>
+      <span class="button reserve" style="<%= @current_user.has_reservation_for?(game) ? 'display:none' : '' %>">
+        Reserve
+      </span>
+      <span class="button cancel" style="<%= @current_user.has_reservation_for?(game) ? '' : 'display:none' %>">
+        Cancel
+      </span>
+    </p>
+    <p class="spots-remaining">
+      <%= 5-game.seats.size %> spots available
+    </p>
+  </div>
+  <div class="avatars" style='float:left'>
+    <ul>
+      <% game.seats.each do |seat| %>
+      <li>
+        <%= seat.user.name %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <ul style="float:right">
+  <% User.all.each do |user| %>
+    <li><span class='rsvp' url='<%= reserve_seats_path(:user_id => user.id, :game_id => game.id) %>'><%= "rsvp #{user.name}" %></span></li>
+  <% end %>
+  </ul>
+</div>
