@@ -1,14 +1,9 @@
 <h1>Listing games</h1>
 
-<table>
-  <tr>
-  </tr>
-
 <% @games.each do |game| %>  
   <%= render :partial => 'cube', :locals => {:game => game} %>
-  <div style="clear:both"></div>
+  <hr class="shadow" />
 <% end %>
-</table>
 
 <br />
 

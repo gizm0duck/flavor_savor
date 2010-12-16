@@ -13,10 +13,24 @@ class SeatsController < ApplicationController
   def reserve
     @game = Game.find params[:game_id]
     @user = User.find params[:user_id]
-    if seat = @game.seats.find_by_user_id(@user.id)
-      seat.destroy
-    else
+    unless seat = @game.seats.find_by_user_id(@user.id, :include => :user)
       @game.seats.create(:user => @user)
+    end
+    game_json = @game.attributes
+    game_json[:seats] = []
+    @game.seats.each do |seat|
+      seat_json = seat.attributes
+      seat_json[:user] = seat.user
+      game_json[:seats] << seat_json[:user]
+    end
+    render :json => game_json
+  end
+  
+  def cancel
+    @game = Game.find params[:game_id]
+    @user = User.find params[:user_id]
+    if seat = @game.seats.find_by_user_id(@user.id, :include => :user)
+      seat.destroy
     end
     game_json = @game.attributes
     game_json[:seats] = []

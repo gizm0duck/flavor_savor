@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :games
 
-  map.resources :seats, :collection => {:reserve => :post}
+  map.resources :seats, :collection => {:reserve => :post, :cancel => :post}
 
   # The priority is based upon order of creation: first created -> highest priority.
 
