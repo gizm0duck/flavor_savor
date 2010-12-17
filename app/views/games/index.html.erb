@@ -1,10 +1,15 @@
 <h1>Listing games</h1>
-
+<div class="gameList">
 <% @games.each do |game| %>  
   <%= render :partial => 'cube', :locals => {:game => game} %>
-  <hr class="shadow" />
 <% end %>
+</div>
 
 <br />
 
-<%= link_to 'New game', new_game_path %>
+<a class="create_dummy_game">new game</a>
+<script type="text/javascript" charset="utf-8">
+  $(".create_dummy_game").click(function() {
+    $.post("/games?name=AGAME",function(data) {createCube(data);})
+  });
+</script>

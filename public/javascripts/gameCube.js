@@ -48,6 +48,11 @@ function updateCube(game){
   scriptCube.current().children('.avatars').html(avatarsHtml);
 }
 
+function createCube(game){
+  $(".gameList").append($(generated_templates.game_cube).attr("id", "cube-" + game.id).attr("gameid", game.id));
+  updateCube(game);
+}
+
 $(function() {
   $(".reserve").live("click", function(){
     var url = "/seats/reserve?game_id=" + $(this).parents(".gameCube")[0].getAttribute("gameid") + "&user_id=" + currentUser.id;

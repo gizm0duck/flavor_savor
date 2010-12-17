@@ -9,7 +9,8 @@
   <%= javascript_include_tag 'jquery', 'mustache', 'jquery.mustache'%>
   <script type="text/javascript" charset="utf-8">
     $(function() {
-      mustachios = {}
+      mustachios = {};
+      generated_templates = {};
       $.each(['avatarList', 'avatar'], function(i,name){
         $.ajax({ 
           url:"/mustachios/"+name+".html", 
@@ -17,6 +18,16 @@
           async: false,
           success: function(template) {
             mustachios[name] = template;
+          }
+        });
+      });
+      $.each(['game_cube'], function(i,name){
+        $.ajax({ 
+          url:"/generated_templates/"+name+".html", 
+          method: "get",
+          async: false,
+          success: function(template) {
+            generated_templates[name] = template;
           }
         });
       });

@@ -66,6 +66,10 @@ a:hover { color: #fff; background-color:#000; }
   float:right;
 }
 
+.button:active {
+  background-color: lightgrey;
+}
+
 .gameCube {
   padding-top: 6px;
   height: 160px;

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_filter :set_current_user
   
   def set_current_user
-    @current_user = User.find_by_id(1)
+    @current_user = User.find_by_id(2)
   end
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password

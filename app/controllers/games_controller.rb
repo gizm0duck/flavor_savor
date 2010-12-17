@@ -41,16 +41,15 @@ class GamesController < ApplicationController
   # POST /games.xml
   def create
     @game = Game.new(params[:game])
-
-    respond_to do |format|
-      if @game.save
-        format.html { redirect_to(@game, :notice => 'Game was successfully created.') }
-        format.xml  { render :xml => @game, :status => :created, :location => @game }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @game.errors, :status => :unprocessable_entity }
-      end
+    @game.save
+    game_json = @game.attributes
+    game_json[:seats] = []
+    @game.seats.each do |seat|
+      seat_json = seat.attributes
+      seat_json[:user] = seat.user
+      game_json[:seats] << seat_json[:user]
     end
+    render :json => game_json
   end
 
   # PUT /games/1
