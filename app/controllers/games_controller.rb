@@ -41,6 +41,7 @@ class GamesController < ApplicationController
   # POST /games.xml
   def create
     @game = Game.new(params[:game])
+    @game.name = "#{Faker::Name.name}'s Game!"
     @game.save
     game_json = @game.attributes
     game_json[:seats] = []

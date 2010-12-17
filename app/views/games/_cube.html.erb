@@ -1,5 +1,6 @@
 <div id="cube-<%= game.id %>" class="gameCube" gameid="<%= game.id %>">
   <div>
+    <span class="game-name"><%= game.name %></span>
     <p style="float:right">
       <div class="button reserve" style="<%= @current_user.has_reservation_for?(game) ? 'display:none' : '' %>">
         Reserve

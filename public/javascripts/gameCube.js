@@ -18,6 +18,10 @@ gameCube = {
     }
   },
   
+  setGameName: function() {
+    $(".game-name", this.current()).html(this.name);
+  },
+  
   current: function() {
     return $('#cube-'+this.id);
   },
@@ -27,23 +31,28 @@ gameCube = {
   },
   
   setSpotsAvailable: function(){
-    this.current().find('.spots-remaining').html(this.maxPlayers()-this.playerCount() + " spots available");
+    $('.spots-remaining', this.current()).html(this.maxPlayers()-this.playerCount() + " spots available");
+  },
+  
+  populateGame: function() {
+    this.setButtonState();
+    this.setSpotsAvailable();
+    this.setGameName();
   },
   
   setState: function(state){
-    scriptCube.current().find('.button').hide();
+    $('.button', scriptCube.current()).hide();
     if(state == 'reserve') {
-      scriptCube.current().find('.reserve').show();
+      $('.reserve', scriptCube.current()).show();
     } else {
-      scriptCube.current().find('.cancel').show();
+      $('.cancel', scriptCube.current()).show();
     }
   }
 }
 
 function updateCube(game){
   scriptCube = $.extend(gameCube, game);
-  scriptCube.setButtonState();
-  scriptCube.setSpotsAvailable();
+  scriptCube.populateGame();
   var avatarsHtml = $.mustache(mustachios.avatarList, scriptCube, {avatarTemplate: mustachios.avatar});
   scriptCube.current().children('.avatars').html(avatarsHtml);
 }
